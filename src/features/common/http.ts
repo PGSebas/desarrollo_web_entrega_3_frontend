@@ -75,3 +75,27 @@ export async function httpClient<T>(endpoint: string, options: RequestOptions = 
 
   return response.json() as Promise<T>;
 }
+
+httpClient.get = function<T>(endpoint: string, options?: RequestOptions): Promise<T> {
+  return httpClient<T>(endpoint, { ...options, method: 'GET' });
+};
+
+httpClient.post = function<T>(endpoint: string, body?: any, options?: RequestOptions): Promise<T> {
+  return httpClient<T>(endpoint, {
+    ...options,
+    method: 'POST',
+    body: body ? JSON.stringify(body) : undefined,
+  });
+};
+
+httpClient.put = function<T>(endpoint: string, body?: any, options?: RequestOptions): Promise<T> {
+  return httpClient<T>(endpoint, {
+    ...options,
+    method: 'PUT',
+    body: body ? JSON.stringify(body) : undefined,
+  });
+};
+
+httpClient.delete = function<T>(endpoint: string, options?: RequestOptions): Promise<T> {
+  return httpClient<T>(endpoint, { ...options, method: 'DELETE' });
+};

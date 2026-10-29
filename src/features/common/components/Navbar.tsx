@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useAuth } from '@/features/auth/hooks/useAuth';
 import { ThemeToggle } from './ThemeToggle';
 import { Button } from './Button';
 import { Badge } from './Badge';
@@ -9,41 +10,18 @@ import { Badge } from './Badge';
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [user, setUser] = useState<{ id: string; nombre: string; email: string; rol: string } | null>(null);
+  const { user, isAuthenticated, isAdmin, logout } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
-
-    // Revisar sesión local
-    const savedUser = localStorage.getItem('noire_user');
-    if (savedUser) {
-      try {
-        setUser(JSON.parse(savedUser));
-      } catch {
-        setUser(null);
-      }
-    }
-
-    const onAuthChange = () => {
-      const u = localStorage.getItem('noire_user');
-      setUser(u ? JSON.parse(u) : null);
-    };
-    window.addEventListener('noire_auth_changed', onAuthChange);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('noire_auth_changed', onAuthChange);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('noire_token');
-    localStorage.removeItem('noire_user');
-    setUser(null);
-    window.dispatchEvent(new Event('noire_auth_changed'));
+    logout();
     window.location.href = '/';
   };
 
@@ -93,12 +71,12 @@ export function Navbar() {
             >
               Unisex
             </Link>
-            {user && (
+            {isAuthenticated && (
               <Link
                 href="/pedidos"
                 className="text-xs uppercase tracking-widest font-medium text-foreground-muted hover:text-accent transition-colors"
               >
-                Mis Pedidos
+                {isAdmin ? 'Gestión Pedidos' : 'Mis Pedidos'}
               </Link>
             )}
           </nav>
@@ -107,13 +85,13 @@ export function Navbar() {
           <div className="hidden md:flex items-center space-x-4">
             <ThemeToggle />
 
-            {user ? (
+            {isAuthenticated && user ? (
               <div className="flex items-center space-x-3">
                 <div className="text-right">
                   <span className="text-xs font-semibold block text-foreground">
                     {user.nombre}
                   </span>
-                  <Badge variant={user.rol === 'ADMIN' ? 'gold' : 'neutral'} className="text-[10px]">
+                  <Badge variant={isAdmin ? 'admin' : 'user'} className="text-[10px]">
                     {user.rol}
                   </Badge>
                 </div>
@@ -194,18 +172,18 @@ export function Navbar() {
           >
             Unisex
           </Link>
-          {user && (
+          {isAuthenticated && (
             <Link
               href="/pedidos"
               onClick={() => setMobileMenuOpen(false)}
               className="block py-2 text-sm uppercase tracking-wider font-medium text-foreground hover:text-accent"
             >
-              Mis Pedidos
+              {isAdmin ? 'Gestión Pedidos' : 'Mis Pedidos'}
             </Link>
           )}
 
           <div className="pt-4 border-t border-border/40">
-            {user ? (
+            {isAuthenticated && user ? (
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-semibold">{user.nombre}</p>
