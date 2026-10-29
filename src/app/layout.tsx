@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { AuthProvider } from '@/features/auth/context/AuthContext';
 
 export const metadata: Metadata = {
   title: 'Noiré Perfumes | Catálogo de Alta Perfumería',
@@ -32,7 +33,9 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased flex flex-col min-h-screen">
-        {children}
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );
