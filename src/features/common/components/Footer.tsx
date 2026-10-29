@@ -90,7 +90,7 @@ export function Footer() {
         </div>
 
         <div className="pt-8 border-t border-border/30 flex flex-col sm:flex-row items-center justify-between text-xs gap-4">
-          <p>© {new Date().getFullYear()} NOIRÉ Haute Parfumerie. Todos los derechos reservados.</p>
+          <p>© 2026 NOIRÉ Haute Parfumerie. Todos los derechos reservados.</p>
           <p className="text-foreground-muted/70">Diseñado con devoción por la excelencia olfativa.</p>
         </div>
       </div>

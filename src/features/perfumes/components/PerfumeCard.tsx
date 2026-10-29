@@ -29,6 +29,8 @@ export function PerfumeCard({ perfume, onSelect, onQuickOrder }: PerfumeCardProp
     disenador: 'Diseñador',
   };
 
+  const notasList = perfume.notas ? perfume.notas.split(',').map((n) => n.trim()) : [];
+
   return (
     <article className="group relative flex flex-col bg-card border border-border/50 rounded-xl overflow-hidden hover:border-accent/60 transition-all duration-300 hover:shadow-xl hover:shadow-accent/5">
       {/* Imagen del perfume */}
@@ -75,9 +77,9 @@ export function PerfumeCard({ perfume, onSelect, onQuickOrder }: PerfumeCardProp
         </p>
 
         {/* Notas Olfativas */}
-        {perfume.notasOlfativas && perfume.notasOlfativas.length > 0 && (
+        {notasList.length > 0 && (
           <div className="flex flex-wrap gap-1 mb-4">
-            {perfume.notasOlfativas.slice(0, 3).map((nota, idx) => (
+            {notasList.slice(0, 3).map((nota, idx) => (
               <span
                 key={idx}
                 className="text-[10px] bg-secondary text-secondary-foreground px-2 py-0.5 rounded-full border border-border/30"
@@ -91,7 +93,7 @@ export function PerfumeCard({ perfume, onSelect, onQuickOrder }: PerfumeCardProp
         <div className="mt-auto pt-3 border-t border-border/40 flex items-center justify-between">
           <div>
             <span className="text-[11px] block text-foreground-muted uppercase tracking-wider">
-              {perfume.volumenMl} ml · Extrait
+              {perfume.concentracion || 'Extrait de Parfum'}
             </span>
             <span className="font-serif text-base font-bold text-foreground">
               {formattedPrice}
