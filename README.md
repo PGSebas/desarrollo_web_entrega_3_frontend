@@ -69,3 +69,31 @@ NEXT_PUBLIC_API_HOST=http://localhost:4000/api
 | `npm run build` | Ejecuta la verificación estricta de tipos de TypeScript y compila el bundle de producción optimizado. |
 | `npm run start` | Arranca el servidor web en modo producción a partir del build generado. |
 | `npm run lint` | Ejecuta el linter ESLint para análisis estático del código fuente. |
+
+---
+
+## 🔑 Credenciales de Prueba y Matriz de Roles
+
+Para la evaluación académica de la entrega, se proporcionan dos cuentas preconfiguradas directamente en el `seed` del backend:
+
+### 1. Cuentas de Acceso
+
+| Rol | Correo Electrónico | Contraseña | Propósito de Prueba |
+| :--- | :--- | :--- | :--- |
+| **Administrador (`ADMIN`)** | `admin@noireperfumes.co` | `Admin123*` | Acceso irrestricto al panel `/admin`, métricas financieras, auditoría de todos los pedidos y CRUD de perfumes. |
+| **Cliente (`USER`)** | `cliente@noireperfumes.co` | `Cliente123*` | Navegación, compra y checkout de fragancias (`/pedidos/nuevo`) y seguimiento en `/pedidos`. Acceso denegado a `/admin`. |
+
+> **Acceso Rápido**: En la pantalla de login (`/login`), se han dispuesto botones de ayuda rápida para autocompletar estas credenciales con un solo clic.
+
+### 2. Matriz de Control de Acceso (Frontend & Backend)
+
+| Funcionalidad / Ruta | Invitado (Público) | Cliente (`USER`) | Administrador (`ADMIN`) |
+| :--- | :---: | :---: | :---: |
+| Explorar catálogo de fragancias (`/`, `GET /perfumes`) | ✅ Sí | ✅ Sí | ✅ Sí |
+| Paginación y filtrado por colección/tipo | ✅ Sí | ✅ Sí | ✅ Sí |
+| Iniciar sesión y registro (`/login`, `/registro`) | ✅ Sí | Redirige al inicio | Redirige al inicio |
+| Solicitar pedido / Checkout (`/pedidos/nuevo`) | ❌ Redirige a `/login` | ✅ Autorizado | ✅ Autorizado |
+| Ver historial personal de pedidos (`/pedidos`) | ❌ Redirige a `/login` | ✅ Solo los propios | ✅ Solo los propios |
+| Panel de administración (`/admin`) | ❌ Redirige a `/login` | ⛔ 403 / Acceso Restringido | ✅ Autorizado |
+| Auditoría global de pedidos (`GET /pedidos`) | ❌ 401 Unauthorized | ⛔ 403 Forbidden | ✅ Autorizado |
+| CRUD del catálogo (`POST/PUT/DELETE /perfumes`) | ❌ 401 Unauthorized | ⛔ 403 Forbidden | ✅ Autorizado |
