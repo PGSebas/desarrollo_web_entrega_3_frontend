@@ -9,9 +9,8 @@
 
 | Entorno / Servicio | Plataforma | Enlace Oficial |
 | :--- | :--- | :--- |
-| **Frontend (Cliente Next.js)** | Vercel | [https://proyecto-semestral.vercel.app](https://proyecto-semestral.vercel.app) |
-| **Backend (API REST Express)** | Render / Railway | [https://desarrollo-web-entrega-3-backend.onrender.com/api](https://desarrollo-web-entrega-3-backend.onrender.com/api) |
-| **Repositorio Frontend** | GitHub | [https://github.com/PGSebas/desarrollo_web_entrega_3_frontend](https://github.com/PGSebas/desarrollo_web_entrega_3_frontend) |
+| **Frontend (Cliente Next.js)** | Vercel | [https://desarrollo-web-entrega-3-frontend.vercel.app](https://desarrollo-web-entrega-3-frontend.vercel.app) |
+| **Backend (API REST Express)** | Render / Railway | [https://desarrollo-web-entrega-3-backend.onrender.com](https://desarrollo-web-entrega-3-backend.onrender.com) |
 | **Repositorio Backend** | GitHub | [https://github.com/PGSebas/desarrollo_web_entrega_3_backend](https://github.com/PGSebas/desarrollo_web_entrega_3_backend) |
 
 ---
