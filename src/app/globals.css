@@ -1,44 +1,55 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
 @import "tailwindcss";
 
+@theme {
+  --color-background: var(--bg-main);
+  --color-foreground: var(--text-main);
+  --color-foreground-muted: var(--text-muted);
+  --color-card: var(--bg-card);
+  --color-card-foreground: var(--text-main);
+  --color-secondary: var(--bg-surface);
+  --color-secondary-foreground: var(--text-muted);
+  --color-accent: #D4AF37;
+  --color-accent-foreground: #000000;
+  --color-border: var(--border-subtle);
+  --color-danger: #EF4444;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
 :root {
-  --bg-main: #0A0A0A;
-  --bg-section: #120616;
-  --bg-card: #1B0B1F;
-  --bg-surface: #26112C;
-  --text-main: #FFFFFF;
-  --text-muted: #CBB4D4;
+  --bg-main: #0A0A0C;
+  --bg-section: #121214;
+  --bg-card: #161619;
+  --bg-surface: #222227;
+  --text-main: #F5F5F7;
+  --text-muted: #A1A1A6;
   --primary-red: #8B0E1A;
   --primary-red-hover: #A81524;
-  --accent-purple: #6A1B9A;
-  --accent-lavender: #E5C6F0;
-  --border-subtle: rgba(229, 198, 240, 0.2);
-  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.6);
+  --accent-gold: #D4AF37;
+  --border-subtle: rgba(255, 255, 255, 0.1);
 }
 
 [data-theme="light"] {
-  --bg-main: #F9F6FB;
-  --bg-section: #F2E5F7;
+  --bg-main: #FBFBFC;
+  --bg-section: #F2F2F5;
   --bg-card: #FFFFFF;
-  --bg-surface: #FFFFFF;
-  --text-main: #1A1A1A;
-  --text-muted: #45344D;
-  --primary-red: #A1132B;
-  --primary-red-hover: #800A1F;
-  --accent-purple: #6A1B9A;
-  --accent-lavender: #6A1B9A;
-  --border-subtle: rgba(106, 27, 154, 0.18);
-  --shadow-card: 0 8px 24px rgba(106, 27, 154, 0.08);
+  --bg-surface: #F0F0F3;
+  --text-main: #1D1D1F;
+  --text-muted: #6E6E73;
+  --primary-red: #8B0E1A;
+  --primary-red-hover: #6E0A14;
+  --accent-gold: #B8860B;
+  --border-subtle: rgba(0, 0, 0, 0.1);
 }
 
 body {
   background-color: var(--bg-main);
   color: var(--text-main);
-  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font-sans);
   min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-h1, h2, h3, .font-serif-noire {
-  font-family: 'Playfair Display', Georgia, serif;
+h1, h2, h3, h4, .font-serif {
+  font-family: var(--font-serif);
 }
