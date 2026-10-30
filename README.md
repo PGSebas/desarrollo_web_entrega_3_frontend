@@ -250,16 +250,8 @@ src/
 ---
 
 ## 👤 Autoría y Créditos
-- **Estudiante**: Sebastián Pinilla Giraldo
+- **Estudiante**: Juan Sebastián Pinilla Giraldo
 - **Materia**: Desarrollo Web — Semestre 2026-2
 - **Proyecto Semestral**: Entrega 3 (Full-Stack Decoupled Architecture)
 
 ---
-
-## 🌟 Bonificaciones Implementadas (+6 pts)
-
-| Bonificación | Pts | Estado | Implementación |
-| :--- | :---: | :---: | :--- |
-| **Filtros combinados en el catálogo (texto, categoría, rango de precio)** | **+2 pts** | ✅ **Cumplida** | Barra de filtrado `PerfumeFilters.tsx` con búsqueda textual, selección de colección (`Hombres`, `Mujeres`, `Unisex`), segmento y selector de rango de precios (`Menos de $1.000.000`, `$1.000.000 - $1.500.000`, `Más de $1.500.000`). |
-| **Pruebas automatizadas de los middlewares de autenticación y rol** | **+3 pts** | ✅ **Cumplida** | Pruebas unitarias automatizadas con Jest en el repositorio de backend (`npm test` con 7/7 tests aprobados). |
-| **Confirmación antes de eliminar en el panel de administración** | **+1 pt** | ✅ **Cumplida** | Diálogo modal nativo `confirm(...)` en `AdminPerfumesTable.tsx` que valida la intención con el nombre exacto de la pieza de colección antes de solicitar la eliminación. |
