@@ -46,31 +46,7 @@ export function Navbar() {
           </Link>
 
           {/* Navegación Desktop */}
-          <nav className="hidden md:flex items-center space-x-7">
-            <Link
-              href="/#catalogo"
-              className="text-xs uppercase tracking-widest font-medium text-foreground-muted hover:text-accent transition-colors"
-            >
-              Catálogo
-            </Link>
-            <Link
-              href="/#catalogo?cat=hombres"
-              className="text-xs uppercase tracking-widest font-medium text-foreground-muted hover:text-accent transition-colors"
-            >
-              Hombres
-            </Link>
-            <Link
-              href="/#catalogo?cat=mujeres"
-              className="text-xs uppercase tracking-widest font-medium text-foreground-muted hover:text-accent transition-colors"
-            >
-              Mujeres
-            </Link>
-            <Link
-              href="/#catalogo?cat=unisex"
-              className="text-xs uppercase tracking-widest font-medium text-foreground-muted hover:text-accent transition-colors"
-            >
-              Unisex
-            </Link>
+          <nav className="hidden md:flex items-center space-x-6">
             {isAuthenticated && (
               <Link
                 href="/pedidos"
@@ -153,34 +129,6 @@ export function Navbar() {
       {/* Menú móvil desplegable */}
       {mobileMenuOpen && (
         <div className="md:hidden bg-card border-b border-border/50 px-4 pt-2 pb-6 space-y-3">
-          <Link
-            href="/#catalogo"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block py-2 text-sm uppercase tracking-wider font-medium text-foreground hover:text-accent"
-          >
-            Catálogo
-          </Link>
-          <Link
-            href="/#catalogo?cat=hombres"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block py-2 text-sm uppercase tracking-wider font-medium text-foreground hover:text-accent"
-          >
-            Hombres
-          </Link>
-          <Link
-            href="/#catalogo?cat=mujeres"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block py-2 text-sm uppercase tracking-wider font-medium text-foreground hover:text-accent"
-          >
-            Mujeres
-          </Link>
-          <Link
-            href="/#catalogo?cat=unisex"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block py-2 text-sm uppercase tracking-wider font-medium text-foreground hover:text-accent"
-          >
-            Unisex
-          </Link>
           {isAuthenticated && (
             <Link
               href="/pedidos"
