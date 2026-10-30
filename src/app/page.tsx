@@ -20,6 +20,7 @@ function CatalogContent() {
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState(catParam);
   const [type, setType] = useState('');
+  const [priceRange, setPriceRange] = useState('');
   const [page, setPage] = useState(1);
   const limit = 8;
 
@@ -31,12 +32,25 @@ function CatalogContent() {
     }
   }, [catParam]);
 
+  let minPrice: number | undefined = undefined;
+  let maxPrice: number | undefined = undefined;
+  if (priceRange === 'under-1m') {
+    maxPrice = 1000000;
+  } else if (priceRange === '1m-1.5m') {
+    minPrice = 1000000;
+    maxPrice = 1500000;
+  } else if (priceRange === 'over-1.5m') {
+    minPrice = 1500000;
+  }
+
   const { perfumes, pagination, isLoading, error, refetch } = usePerfumes({
     page,
     limit,
     categoria: category || undefined,
     tipo: type || undefined,
     search: search || undefined,
+    minPrice,
+    maxPrice,
   });
 
   const handleSearchChange = (val: string) => {
@@ -54,10 +68,16 @@ function CatalogContent() {
     setPage(1);
   };
 
+  const handlePriceRangeChange = (val: string) => {
+    setPriceRange(val);
+    setPage(1);
+  };
+
   const handleResetFilters = () => {
     setSearch('');
     setCategory('');
     setType('');
+    setPriceRange('');
     setPage(1);
   };
 
@@ -97,9 +117,11 @@ function CatalogContent() {
         search={search}
         category={category}
         type={type}
+        priceRange={priceRange}
         onSearchChange={handleSearchChange}
         onCategoryChange={handleCategoryChange}
         onTypeChange={handleTypeChange}
+        onPriceRangeChange={handlePriceRangeChange}
         onReset={handleResetFilters}
       />
 

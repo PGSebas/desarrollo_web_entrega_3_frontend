@@ -10,6 +10,8 @@ export const perfumeService = {
         categoria: filters.categoria,
         tipo: filters.tipo,
         search: filters.search,
+        minPrice: filters.minPrice,
+        maxPrice: filters.maxPrice,
       },
     });
   },

@@ -21,6 +21,8 @@ export interface PerfumeFilters {
   categoria?: string;
   tipo?: string;
   search?: string;
+  minPrice?: number;
+  maxPrice?: number;
 }
 
 export interface PaginatedPerfumes {
