@@ -14,7 +14,7 @@ export function Footer() {
               Curaduría exclusiva de fragancias de autor, nicho y diseñador. Elevamos cada instante a una experiencia sensorial inolvidable.
             </p>
             <span className="text-[11px] block text-accent font-medium">
-              Bogotá, Colombia · Entregas a todo el país
+              Medellín, Colombia · Entregas a todo el país
             </span>
           </div>
 

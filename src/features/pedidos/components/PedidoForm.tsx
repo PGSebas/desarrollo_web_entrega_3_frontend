@@ -181,7 +181,7 @@ export function PedidoForm({ perfume }: PedidoFormProps) {
               <Input
                 id="pedido-direccion"
                 label="Dirección de Envío Completa"
-                placeholder="Calle 123 # 45-67, Apto 801, Bogotá"
+                placeholder="Calle 123 # 45-67, Apto 801, Medellín"
                 value={direccionEnvio}
                 onChange={(e) => setDireccionEnvio(e.target.value)}
                 required
