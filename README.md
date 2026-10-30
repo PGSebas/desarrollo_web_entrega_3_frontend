@@ -169,7 +169,7 @@ En esta aplicación, el token JWT se almacena en el **`localStorage`** del naveg
 
 ---
 
-### 3. ¿En qué caso tu API responde 401 y en cuál 403? Ejemplos Reales de la Aplicación
+### 3. ¿En qué caso el API responde 401 y en cuál 403? Ejemplos Reales de la Aplicación
 
 La diferencia fundamental radica en **autenticación (quién eres)** frente a **autorización (qué tienes permitido hacer)**:
 
@@ -250,6 +250,6 @@ src/
 ---
 
 ## 👤 Autoría y Créditos
-- **Estudiante**: Sebastián Pineda González
+- **Estudiante**: Sebastián Pinilla Giraldo
 - **Materia**: Desarrollo Web — Semestre 2026-2
 - **Proyecto Semestral**: Entrega 3 (Full-Stack Decoupled Architecture)
