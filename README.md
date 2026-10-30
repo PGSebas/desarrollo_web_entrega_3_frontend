@@ -187,3 +187,70 @@ El código de estado `403 Forbidden` se emite cuando el usuario **sí está aute
   - Un cliente registrado con rol regular `USER` (`cliente@noireperfumes.co`) inicia sesión normalmente (obteniendo un token JWT válido con payload `{ id: 2, role: "USER" }`).
   - Si este usuario intenta consultar la auditoría global de todas las compras de la plataforma mediante `GET /api/pedidos` o intenta eliminar un perfume mediante `DELETE /api/perfumes/1`, la petición supera con éxito el middleware `requireAuth` (porque el token es válido y no es 401), pero al llegar al middleware `requireAdmin`, éste comprueba que `req.user.role !== 'ADMIN'`.
   - El servidor responde `403 Forbidden` con el mensaje: `"Acceso denegado: se requieren privilegios de administrador"`. El usuario está autenticado, pero no tiene el rol necesario.
+
+---
+
+## 🏛️ Arquitectura Modular por Features
+
+El proyecto implementa la arquitectura por **features** recomendada en clase, desacoplando completamente la lógica de negocio, los modelos de dominio, el consumo HTTP y la presentación visual:
+
+```
+src/
+├── app/                              # Rutas del App Router (solo composición)
+│   ├── layout.tsx                    # RootLayout con AuthProvider y script anti-parpadeo de tema
+│   ├── page.tsx                      # Catálogo principal con filtros y paginación
+│   ├── not-found.tsx                 # Página 404 personalizada con estética Noiré
+│   ├── login/
+│   │   └── page.tsx                  # Pantalla de inicio de sesión
+│   ├── registro/
+│   │   └── page.tsx                  # Pantalla de registro de nuevos clientes
+│   ├── pedidos/
+│   │   ├── page.tsx                  # Historial de pedidos personales (ruta protegida)
+│   │   └── nuevo/
+│   │       └── page.tsx              # Checkout y solicitud de compra (ruta protegida)
+│   └── admin/
+│       └── page.tsx                  # Panel administrativo exclusivo para rol ADMIN
+└── features/                         # Módulos desacoplados por dominio
+    ├── common/                       # Infraestructura transversal
+    │   ├── config.ts                 # API_BASE_URL resuelta desde NEXT_PUBLIC_API_HOST
+    │   ├── http.ts                   # Cliente HTTP centralizado (Bearer token, 401 redirect, get/post/put/delete)
+    │   └── components/               # Componentes UI base (Navbar, Footer, Hero, Button, Input, Badge, Pagination, ThemeToggle)
+    ├── auth/                         # Feature: Autenticación & Sesión
+    │   ├── domain/                   # Modelos: User, AuthResponse, LoginDto, RegisterDto
+    │   ├── services/                 # authService (login, register, logout, getStoredSession)
+    │   ├── context/                  # AuthContext (proveedor global de sesión reactiva)
+    │   ├── hooks/                    # useAuth (hook de consumo de contexto)
+    │   └── components/               # LoginForm, RegisterForm, ProtectedRoute
+    ├── perfumes/                     # Feature: Catálogo de Fragancias
+    │   ├── domain/                   # Modelos: Perfume, PerfumeFilters, PaginatedPerfumes
+    │   ├── services/                 # perfumeService (getAll, getById, create, update, delete)
+    │   ├── hooks/                    # usePerfumes (carga con paginación, filtros y recarga)
+    │   └── components/               # PerfumeCard, PerfumeGrid, PerfumeFilters, PerfumeSkeleton
+    ├── pedidos/                      # Feature: Interacción / Pedidos
+    │   ├── domain/                   # Modelos: Pedido, CreatePedidoDto, PedidoStatus
+    │   ├── services/                 # pedidoService (create, getMias, getAll)
+    │   ├── hooks/                    # usePedidos, useCreatePedido
+    │   └── components/               # PedidoForm, PedidoCard, PedidoList
+    └── admin/                        # Feature: Gestión Administrativa
+        ├── services/                 # adminService (getAllPedidos, getAllPerfumes, CRUD)
+        ├── hooks/                    # useAdminData (KPIs, orquestación de datos y borrado)
+        └── components/               # AdminStats, AdminPedidosTable, AdminPerfumesTable, PerfumeModalForm
+```
+
+---
+
+## 🎨 Sistema de Diseño Noiré Haute Parfumerie
+
+- **Tipografía Editorial**: `Playfair Display` para títulos y logotipos de alta gama, y `Montserrat` para textos técnicos, descripciones y microcopia.
+- **Paleta de Colores de Lujo**:
+  - Acento Dorado Noiré: `#D4AF37` / `#C5A059`
+  - Fondo Obsidiana Profundo: `#0B0B0C` (Dark Mode) y Mármol Suave `#F8F6F2` (Light Mode)
+  - Vino Granate Real: `#8B0E1A` para botones principales de compra y llamados a la acción.
+- **Soporte de Tema Dual**: Alternador reactivo de modo claro/oscuro persistido en `localStorage` con script de hidratación temprana en `<head>` para evitar parpadeos visuales (*FOUC*).
+
+---
+
+## 👤 Autoría y Créditos
+- **Estudiante**: Sebastián Pineda González
+- **Materia**: Desarrollo Web — Semestre 2026-2
+- **Proyecto Semestral**: Entrega 3 (Full-Stack Decoupled Architecture)
