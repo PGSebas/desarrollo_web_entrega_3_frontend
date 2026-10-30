@@ -1,6 +1,7 @@
 export interface User {
   id: number;
   nombre: string;
+  name?: string;
   email: string;
   rol: 'ADMIN' | 'USER';
   createdAt?: string;

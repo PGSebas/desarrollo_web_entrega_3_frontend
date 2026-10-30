@@ -46,7 +46,7 @@ export function Navbar() {
           </Link>
 
           {/* Navegación Desktop */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-7">
             <Link
               href="/#catalogo"
               className="text-xs uppercase tracking-widest font-medium text-foreground-muted hover:text-accent transition-colors"
@@ -76,7 +76,16 @@ export function Navbar() {
                 href="/pedidos"
                 className="text-xs uppercase tracking-widest font-medium text-foreground-muted hover:text-accent transition-colors"
               >
-                {isAdmin ? 'Gestión Pedidos' : 'Mis Pedidos'}
+                Mis Pedidos
+              </Link>
+            )}
+            {isAdmin && (
+              <Link
+                href="/admin"
+                className="inline-flex items-center gap-1.5 text-xs uppercase tracking-widest font-bold text-accent hover:text-amber-300 transition-colors bg-accent/10 px-3 py-1.5 rounded-lg border border-accent/30"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                Administración
               </Link>
             )}
           </nav>
@@ -178,7 +187,16 @@ export function Navbar() {
               onClick={() => setMobileMenuOpen(false)}
               className="block py-2 text-sm uppercase tracking-wider font-medium text-foreground hover:text-accent"
             >
-              {isAdmin ? 'Gestión Pedidos' : 'Mis Pedidos'}
+              Mis Pedidos
+            </Link>
+          )}
+          {isAdmin && (
+            <Link
+              href="/admin"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block py-2 text-sm uppercase tracking-wider font-bold text-accent bg-accent/10 px-3 rounded-lg"
+            >
+              Panel de Administración
             </Link>
           )}
 

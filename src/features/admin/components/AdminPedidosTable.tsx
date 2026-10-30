@@ -102,7 +102,7 @@ export function AdminPedidosTable({ pedidos }: AdminPedidosTableProps) {
                     </td>
                     <td className="py-3.5 px-4">
                       <div className="font-semibold text-foreground">
-                        {p.user?.name || `Usuario #${p.userId}`}
+                        {p.user?.nombre || p.user?.name || `Usuario #${p.userId}`}
                       </div>
                       <div className="text-[10px] text-foreground-muted">
                         {p.user?.email || p.telefono || 'Sin email'}
