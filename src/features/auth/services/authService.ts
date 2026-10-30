@@ -3,27 +3,72 @@ import { AuthResponse, LoginDto, RegisterDto, User } from '../domain/auth';
 
 export const authService = {
   async login(credentials: LoginDto): Promise<AuthResponse> {
-    const res = await httpClient.post<AuthResponse>('/auth/login', credentials);
-    if (res.token && typeof window !== 'undefined') {
-      localStorage.setItem('noire_token', res.token);
-      localStorage.setItem('noire_user', JSON.stringify(res.user));
+    const res = await httpClient.post<any>('/auth/login', {
+      email: credentials.email,
+      password: credentials.contrasena,
+      contrasena: credentials.contrasena,
+    });
+
+    const user: User = {
+      id: res.user.id,
+      nombre: res.user.name || res.user.nombre,
+      name: res.user.name || res.user.nombre,
+      email: res.user.email,
+      rol: (res.user.role || res.user.rol) as 'ADMIN' | 'USER',
+    };
+
+    const authResponse: AuthResponse = {
+      token: res.token,
+      user,
+    };
+
+    if (authResponse.token && typeof window !== 'undefined') {
+      localStorage.setItem('noire_token', authResponse.token);
+      localStorage.setItem('noire_user', JSON.stringify(authResponse.user));
       window.dispatchEvent(new Event('noire_auth_changed'));
     }
-    return res;
+    return authResponse;
   },
 
   async register(data: RegisterDto): Promise<AuthResponse> {
-    const res = await httpClient.post<AuthResponse>('/auth/register', data);
-    if (res.token && typeof window !== 'undefined') {
-      localStorage.setItem('noire_token', res.token);
-      localStorage.setItem('noire_user', JSON.stringify(res.user));
+    const res = await httpClient.post<any>('/auth/register', {
+      name: data.nombre,
+      nombre: data.nombre,
+      email: data.email,
+      password: data.contrasena,
+      contrasena: data.contrasena,
+    });
+
+    const user: User = {
+      id: res.user.id,
+      nombre: res.user.name || res.user.nombre,
+      name: res.user.name || res.user.nombre,
+      email: res.user.email,
+      rol: (res.user.role || res.user.rol) as 'ADMIN' | 'USER',
+    };
+
+    const authResponse: AuthResponse = {
+      token: res.token,
+      user,
+    };
+
+    if (authResponse.token && typeof window !== 'undefined') {
+      localStorage.setItem('noire_token', authResponse.token);
+      localStorage.setItem('noire_user', JSON.stringify(authResponse.user));
       window.dispatchEvent(new Event('noire_auth_changed'));
     }
-    return res;
+    return authResponse;
   },
 
   async getProfile(): Promise<User> {
-    return httpClient.get<User>('/auth/perfil');
+    const res = await httpClient.get<any>('/auth/me');
+    return {
+      id: res.id,
+      nombre: res.name || res.nombre,
+      name: res.name || res.nombre,
+      email: res.email,
+      rol: res.role || res.rol,
+    };
   },
 
   logout(): void {
